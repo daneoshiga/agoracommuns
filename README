@@ -1,0 +1,100 @@
+primeiro rascunho do da plataforma Ágora Communs como API REST baseada em
+django
+
+rest/pautas
+    GET - traz todas as pautas
+        filtros:
+            status:
+                possiveis status
+                proposta, deliberação, votacao, fechada
+            datainicio:
+                a partir de qual data
+            datafim:
+                ateh qual data
+            autor:
+                id do usuario que criou a pauta
+
+rest/pauta/<id>
+    GET - traz pauta com id x
+            
+    PUT - edita pauta
+    POST - insere nova pauta
+    DELETE - deleta pauta
+
+rest/pauta/<id>/comentarios
+    GET - traz os comentários da pauta
+        filtros:
+            autor, data
+    POST - insere novo comentário naquela pauta
+    
+rest/comentario/<id>
+    GET - traz comentario com ID x
+    PUT - edita comentario
+    DELETE - deleta comentário
+
+
+rest/pauta/<id>/deliberacoes
+    GET - traz X ultimas deliberacoes
+    POST - adiciona uma nova deliberacao
+    DELETE - deleta uma deliberacao (se vc tiver sido o criador)
+
+rest/deliberacao/<id>
+    GET - traz info daquela deliberacao
+    PUT - edita deliberação
+    DELETE - apaga deliberação
+
+rest/pauta/<id>/votos
+    GET - traz votos daquela pauta
+        filtros:
+            autor, tipo
+    POST - vota naquela pauta
+
+rest/deliberacao/<id>/votos
+    GET - traz votos daquela deliberacao
+        filtros:
+            autor, tipo
+    POST - vota naquela deliberacao
+
+rest/voto/<id>
+    GET - traz info daquele voto
+    PUT - edita voto
+    DELETE - deleta voto
+
+BASE
+
+usuario
+    id
+    nome
+    senha
+    grupo
+
+pauta
+    id
+    id_usuario
+    data_criacao    
+    data_validacao  //data limite para validacao da pauta (proposta -> pauta)
+    data_delibera   //data limite para deliberacao (comentarios e deliberacoes)
+    data_votacao    //data limite para votacao nas propostas
+    votos_promover  //votos necessarios para promover proposta a pauta
+    titulo
+    pauta
+    estado (1:proposta, 2: deliberacao, 3:votacao, 4:fechada)
+
+voto
+    id
+    id_pauta        //pauta q recebeu voto ou
+    id_usuario
+    id_deliberacao  //deliberacao q recebeu voto
+    tipo
+
+comentario
+    id
+    id_pauta
+    data_hora
+    texto
+
+deliberacao
+    id
+    id_pauta
+    id_usuario
+    proposta
