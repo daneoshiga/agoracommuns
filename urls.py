@@ -5,6 +5,7 @@ from django.conf.urls.defaults import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'api/', include('mysite.api.urls')),
     # Examples:
     # url(r'^$', 'agoracommuns.views.home', name='home'),
     # url(r'^agoracommuns/', include('agoracommuns.foo.urls')),
