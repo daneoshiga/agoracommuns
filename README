@@ -1,6 +1,9 @@
 primeiro rascunho do da plataforma Ágora Communs como API REST baseada em
 django
 
+requerimento:
+    pacote python-django-piston
+
 rest/pautas
     GET - traz todas as pautas
         filtros:
