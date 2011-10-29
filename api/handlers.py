@@ -1,8 +1,8 @@
 from piston.handler import BaseHandler
-from myapp.models import Pauta
+from core.models import Pauta
 
 class PautaHandler(BaseHandler):
-    allowed_methods('GET','PUT','POST','DELETE')
+    allowed_methods = ('GET','PUT','POST','DELETE')
     model = Pauta
 
     def read(self, request, id=None):
