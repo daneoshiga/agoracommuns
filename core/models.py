@@ -22,10 +22,14 @@ class Deliberacao(models.Model):
     proposta = models.TextField()
 
 class Voto(models.Model):
+    VOTE_CHOICE = (
+            (1,  'Favor'),
+            (-1, 'Contra'),
+            )
     pauta = models.ForeignKey(Pauta)
     usuario = models.ForeignKey(Usuario)
     deliberacao = models.ForeignKey(Deliberacao)
-    tipo = models.IntegerField()
+    tipo = models.IntegerField(max_length=1, choices = VOTE_CHOICE)
 
 class Comentario(models.Model):
     pauta = models.ForeignKey(Pauta)
