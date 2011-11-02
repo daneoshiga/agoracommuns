@@ -1,11 +1,12 @@
 from piston.handler import BaseHandler
-from core.models import Pauta
+from core.models import * 
 
 class PautaHandler(BaseHandler):
     allowed_methods = ('GET','PUT','POST','DELETE')
     model = Pauta
 
-    def read(self, request, id=None):
+    def read(self, request, id=None, status=None, autor=None, datainicio=None,
+            datafim=None):
         """
         First draft of what GET /api/pautas should return
         """
@@ -28,7 +29,8 @@ class PautaHandler(BaseHandler):
                     data_votacao = attrs['data_votacao'],
                     votos_promover = attrs['votos_promover'],
                     titulo = attrs['titulo'],
-                    pauta = attrs['pauta']
+                    pauta = attrs['pauta'],
+                    status = 1
                     )
     pauta
         except:
@@ -37,4 +39,11 @@ class PautaHandler(BaseHandler):
             model.save()
         return model
 
+class DeliberacaoHandler(BaseHandler):
+    deliberacao = Deliberacao
 
+class Voto(BaseHandler):
+    voto = Voto
+
+class Comentario(BaseHandler):
+    comentario = comentario

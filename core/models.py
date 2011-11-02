@@ -6,6 +6,12 @@ class Usuario(models.Model):
     grupo = models.IntegerField()
 
 class Pauta(models.Model):
+    STATUS_CHOICE = (
+            (1, 'Proposta'),
+            (2, 'Deliberacao'),
+            (3, 'Votacao'),
+            (4, 'Fechada')
+            )
     usuario = models.ForeignKey(Usuario)
     data_criacao = models.DateField("Data", auto_now_add=True)
     data_validacao = models.DateField("Data Validacao")
@@ -14,6 +20,7 @@ class Pauta(models.Model):
     votos_promover = models.IntegerField()
     titulo = models.CharField(max_length=70)
     pauta = models.TextField()
+    status = models.IntegerField(max_length=1, choices = STATUS_CHOICE)
 
 
 class Deliberacao(models.Model):
