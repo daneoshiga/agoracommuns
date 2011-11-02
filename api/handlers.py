@@ -5,8 +5,7 @@ class PautaHandler(BaseHandler):
     allowed_methods = ('GET','PUT','POST','DELETE')
     model = Pauta
 
-    def read(self, request, id=None, status=None, autor=None, datainicio=None,
-            datafim=None):
+    def read(self, request, id=None, status=None, autor=None, datainicio=None, datafim=None):
         """
         First draft of what GET /api/pautas should return
         """
@@ -32,7 +31,6 @@ class PautaHandler(BaseHandler):
                     pauta = attrs['pauta'],
                     status = 1
                     )
-    pauta
         except:
             return rc.BAD_REQUEST
         else:
@@ -46,4 +44,4 @@ class Voto(BaseHandler):
     voto = Voto
 
 class Comentario(BaseHandler):
-    comentario = comentario
+    comentario = Comentario
