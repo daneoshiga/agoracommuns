@@ -22,10 +22,19 @@ class PautaHandler(BaseHandler):
             request.data = request.POST
         attrs = self.flatten_dict(request.data)
         try:
-            model = self.model(testfield=attrs['testfield'])
+            model = self.model(usuario = attrs['usuario'],
+                    data_validacao = attrs['data_validacao'],
+                    data_delibera = attrs['data_delibera'],
+                    data_votacao = attrs['data_votacao'],
+                    votos_promover = attrs['votos_promover'],
+                    titulo = attrs['titulo'],
+                    pauta = attrs['pauta']
+                    )
+    pauta
         except:
             return rc.BAD_REQUEST
         else:
             model.save()
         return model
+
 
