@@ -3,10 +3,17 @@ from piston.resource import Resource
 
 from agoracommuns.api.handlers import *
 
-pauta_handler = Resource(PautaHandler)
-comentario_handler = Resource(ComentarioHandler)
-deliberacao_handler = Resource(DeliberacaoHandler)
-voto_handler = Resource(VotoHandler)
+class CsrfExemptResource(Resource):
+    """A Custom Resource that is csrf exempt"""
+    def __init__(self, handler, authentication=None):
+        super(CsrfExemptResource, self).__init__(handler, authentication)
+        self.csrf_exempt = getattr(self.handler, 'csrf_exempt', True)
+
+
+pauta_handler = CsrfExemptResource(PautaHandler)
+comentario_handler = CsrfExemptResource(ComentarioHandler)
+deliberacao_handler = CsrfExemptResource(DeliberacaoHandler)
+voto_handler = CsrfExemptResource(VotoHandler)
 
 urlpatterns = patterns('',
         url(r'^pauta/(?P<pauta_id>\d+)/comentarios/$',comentario_handler),
