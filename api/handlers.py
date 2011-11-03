@@ -40,10 +40,32 @@ class PautaHandler(BaseHandler):
         return model
 
 class DeliberacaoHandler(BaseHandler):
+    allowed_methods = ('GET','PUT','POST','DELETE')
     deliberacao = Deliberacao
 
+    def read(self, request, id=None, pauta_id=None):
+        base = Deliberacao.objects
+
+        if id:
+            return base.get(pk=id)
+        elif pauta_id:
+            return base.get(pauta=pauta_id)
+        else:
+            return base.all()
+
 class VotoHandler(BaseHandler):
+    allowed_methods = ('GET','PUT','POST','DELETE')
     voto = Voto
+
+    def read(self, request, id=None, pauta_id=None):
+        base = Voto.objects
+
+        if id:
+            return base.get(pk=id)
+        elif pauta_id:
+            return base.get(pauta=pauta_id)
+        else:
+            return base.all()
 
 class ComentarioHandler(BaseHandler):
     allowed_methods = ('GET','PUT','POST','DELETE')
