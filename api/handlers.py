@@ -42,8 +42,19 @@ class PautaHandler(BaseHandler):
 class DeliberacaoHandler(BaseHandler):
     deliberacao = Deliberacao
 
-class Voto(BaseHandler):
+class VotoHandler(BaseHandler):
     voto = Voto
 
-class Comentario(BaseHandler):
+class ComentarioHandler(BaseHandler):
+    allowed_methods = ('GET','PUT','POST','DELETE')
     comentario = Comentario
+
+    def read(self, request, id=None, pauta_id=None):
+        base = Comentario.objects
+
+        if id:
+            return base.get(pk=id)
+        elif pauta_id:
+            return base.get(pauta=pauta_id)
+        else:
+            return base.all()
