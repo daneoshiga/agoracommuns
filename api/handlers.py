@@ -5,7 +5,7 @@ class PautaHandler(BaseHandler):
     allowed_methods = ('GET','PUT','POST','DELETE')
     model = Pauta
 
-    def read(self, request, id=None, status=None, autor=None, datainicio=None, datafim=None):
+    def read(self, request, id=None, status_id=None, autor=None, datainicio=None, datafim=None):
         """
         First draft of what GET /api/pautas should return
         """
@@ -14,6 +14,8 @@ class PautaHandler(BaseHandler):
 
         if id:
             return base.get(pk=id)
+        elif status_id:
+            return base.get(status=status_id)
         else:
             return base.all()
 

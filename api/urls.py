@@ -7,6 +7,6 @@ pauta_handler = Resource(PautaHandler)
 
 urlpatterns = patterns('',
         url(r'^pauta/(?P<id>[^/]+)/',pauta_handler),
+        url(r'^pautas/status/(?P<status_id>[^/]+)/',pauta_handler),
         url(r'^pautas/',pauta_handler),
         )
-
