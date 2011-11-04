@@ -1,6 +1,5 @@
 class ContentTypeMiddleware(object):
-
     def process_request(self, request):
-        if request.META['CONTENT_TYPE'] == 'application/x-www-form-urlencoded; charset=UTF-8':
-            request.META['CONTENT_TYPE'] = 'application/x-www-form-urlencoded'
+        if request.method in ('POST', 'PUT') and request.META['CONTENT_TYPE'].count(";") > 0:
+            request.META['CONTENT_TYPE'] = [c.strip() for c in request.META['CONTENT_TYPE'].split(";") ][0]
         return None

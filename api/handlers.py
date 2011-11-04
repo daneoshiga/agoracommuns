@@ -64,7 +64,7 @@ class VotoHandler(BaseHandler):
         if id:
             return base.get(pk=id)
         elif pauta_id:
-            return base.get(pauta=pauta_id)
+            return base.filter(pauta=pauta_id)
         else:
             return base.all()
 
@@ -74,14 +74,14 @@ class VotoHandler(BaseHandler):
 
         attrs = self.flatten_dict(request.data)
         try:
-            mymodel = Voto(pauta=attrs['pauta'],
-                    usuario=attrs['usuario'],
-                    tipo=attrs['usuario'])
+            mymodel = Voto(pauta= Pauta.objects.get(pk=attrs['pauta']),
+                    usuario=Usuario.objects.get(pk=attrs['usuario']),
+                    tipo=attrs['tipo'])
         except:
             return rc.BAD_REQUEST
         else:
             mymodel.save()
-        return mymodel
+            return mymodel
 
 class ComentarioHandler(BaseHandler):
     allowed_methods = ('GET','PUT','POST','DELETE')

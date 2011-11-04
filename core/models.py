@@ -39,9 +39,9 @@ class Voto(models.Model):
             (1,  'Favor'),
             (-1, 'Contra'),
             )
-    pauta = models.ForeignKey(Pauta)
+    pauta = models.ForeignKey(Pauta, null=True)
     usuario = models.ForeignKey(Usuario)
-    deliberacao = models.ForeignKey(Deliberacao)
+    deliberacao = models.ForeignKey(Deliberacao, null=True)
     tipo = models.IntegerField(max_length=1, choices = VOTE_CHOICE)
     def __unicode__(self):
         return self.usuario.usuario
