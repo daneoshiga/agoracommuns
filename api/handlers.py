@@ -54,6 +54,25 @@ class DeliberacaoHandler(BaseHandler):
         else:
             return base.all()
 
+    def create(self, request, *args, **kwargs):
+        if not hasattr(request, "data"):
+            request.data = request.POST
+
+        attrs = self.flatten_dict(request.data)
+        try:
+            mymodel = Deliberacao(
+                pauta=Pauta.objects.get(pk=attrs['pauta']),
+                usuario=Usuario.objects.get(pk=attrs['usuario']),
+                proposta=attrs['proposta'],
+                )
+        except:
+            return rc.BAD_REQUEST
+        else:
+            mymodel.save()
+            return mymodel
+
+
+
 class VotoHandler(BaseHandler):
     allowed_methods = ('GET','PUT','POST','DELETE')
     voto = Voto
@@ -96,3 +115,19 @@ class ComentarioHandler(BaseHandler):
             return base.filter(pauta=pauta_id)
         else:
             return base.all()
+
+    def create(self, request, *args, **kwargs):
+        if not hasattr(request, "data"):
+            request.data = request.POST
+
+        attrs = self.flatten_dict(request.data)
+        try:
+            mymodel = Comentario(
+                pauta=Pauta.objects.get(pk=attrs['pauta']),
+                texto=attrs['texto'],
+                )
+        except:
+            return rc.BAD_REQUEST
+        else:
+            mymodel.save()
+            return mymodel
