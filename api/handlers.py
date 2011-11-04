@@ -78,13 +78,15 @@ class VotoHandler(BaseHandler):
     allowed_methods = ('GET','PUT','POST','DELETE')
     voto = Voto
 
-    def read(self, request, id=None, pauta_id=None):
+    def read(self, request, id=None, pauta_id=None, delibera_id=None):
         base = Voto.objects
 
         if id:
             return base.get(pk=id)
         elif pauta_id:
             return base.filter(pauta=pauta_id)
+        elif delibera_id:
+            return base.filter(deliberacao=delibera_id)
         else:
             return base.all()
 
@@ -93,17 +95,29 @@ class VotoHandler(BaseHandler):
             request.data = request.POST
 
         attrs = self.flatten_dict(request.data)
+
+
+
         try:
-            mymodel = Voto(
-                    pauta= Pauta.objects.get(pk=kwargs['pauta_id']),
-                    usuario=Usuario.objects.get(pk=attrs['usuario']),
-                    tipo=attrs['tipo'],
-                    )
+            #FIXME find better way to reference pauta and deliberacao votes
+            if 'pauta_id' in kwargs:
+                mymodel = Voto(
+                        pauta= Pauta.objects.get(pk=kwargs['pauta_id']),
+                        usuario=Usuario.objects.get(pk=attrs['usuario']),
+                        tipo=attrs['tipo'],
+                        )
+            else:
+                mymodel = Voto(
+                        deliberacao=Deliberacao.objects.get(pk=kwargs['delibera_id']),
+                        usuario=Usuario.objects.get(pk=attrs['usuario']),
+                        tipo=attrs['tipo'],
+                        )
+
         except:
             return rc.BAD_REQUEST
         else:
             mymodel.save()
-            return mymodel
+        return mymodel
 
 class ComentarioHandler(BaseHandler):
     allowed_methods = ('GET','PUT','POST','DELETE')

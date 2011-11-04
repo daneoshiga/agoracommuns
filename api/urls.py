@@ -24,5 +24,7 @@ urlpatterns = patterns('',
         url(r'^pautas/$',pauta_handler),
         url(r'^comentario/(?P<id>\d+)/$',comentario_handler),
         url(r'^deliberacao/(?P<id>\d+)/$',deliberacao_handler),
+        url(r'^deliberacao/(?P<delibera_id>\d+)/$',deliberacao_handler),
+        url(r'^deliberacao/(?P<delibera_id>\d+)/votos/$',voto_handler),
         url(r'^votos/(?P<id>\d+)/$',voto_handler),
         )
