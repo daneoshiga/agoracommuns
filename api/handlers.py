@@ -68,6 +68,21 @@ class VotoHandler(BaseHandler):
         else:
             return base.all()
 
+    def create(self, request, *args, **kwargs):
+        if not hasattr(request, "data"):
+            request.data = request.POST
+
+        attrs = self.flatten_dict(request.data)
+        try:
+            mymodel = Voto(pauta=attrs['pauta'],
+                    usuario=attrs['usuario'],
+                    tipo=attrs['usuario'])
+        except:
+            return rc.BAD_REQUEST
+        else:
+            mymodel.save()
+        return mymodel
+
 class ComentarioHandler(BaseHandler):
     allowed_methods = ('GET','PUT','POST','DELETE')
     comentario = Comentario

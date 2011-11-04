@@ -7,8 +7,11 @@
 </head>
 <body>
    <form action="http://127.0.0.1:8000/api/pauta/1/votos/" method="post" accept-charset="utf-8">
+       <input type="hidden" name="pauta" value="1">
+       <input type="hidden" name="usuario" value="1">
+
        <ul>
-           <li><label for="voto">voto</label><input type="text" name="voto" value="" id="voto"></li>
+           <li><label for="tipo">tipo</label><input type="text" name="tipo" value="" id="tipo"></li>
        </ul>
        
    
