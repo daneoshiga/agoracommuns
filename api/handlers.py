@@ -61,7 +61,7 @@ class DeliberacaoHandler(BaseHandler):
         attrs = self.flatten_dict(request.data)
         try:
             mymodel = Deliberacao(
-                pauta=Pauta.objects.get(pk=attrs['pauta']),
+                pauta=Pauta.objects.get(pk=kwargs['pauta_id']),
                 usuario=Usuario.objects.get(pk=attrs['usuario']),
                 proposta=attrs['proposta'],
                 )
@@ -93,7 +93,7 @@ class VotoHandler(BaseHandler):
 
         attrs = self.flatten_dict(request.data)
         try:
-            mymodel = Voto(pauta= Pauta.objects.get(pk=attrs['pauta']),
+            mymodel = Voto(pauta= Pauta.objects.get(pk=kwargs['pauta_id']),
                     usuario=Usuario.objects.get(pk=attrs['usuario']),
                     tipo=attrs['tipo'])
         except:
@@ -123,7 +123,7 @@ class ComentarioHandler(BaseHandler):
         attrs = self.flatten_dict(request.data)
         try:
             mymodel = Comentario(
-                pauta=Pauta.objects.get(pk=attrs['pauta']),
+                pauta=Pauta.objects.get(pk=kwargs['pauta_id']),
                 texto=attrs['texto'],
                 )
         except:
