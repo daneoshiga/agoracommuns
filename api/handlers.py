@@ -16,7 +16,7 @@ class PautaHandler(BaseHandler):
         if id:
             return base.get(pk=id)
         elif status_id:
-            return base.get(status=status_id)
+            return base.filter(status=status_id)
         else:
             return base.all()
 
@@ -25,7 +25,7 @@ class PautaHandler(BaseHandler):
             request.data = request.POST
         attrs = self.flatten_dict(request.data)
         try:
-            model = self.model(usuario = attrs['usuario'],
+            model = self.model(usuario = Usuario.objects.get(pk=attrs['usuario']),
                     data_validacao = attrs['data_validacao'],
                     data_delibera = attrs['data_delibera'],
                     data_votacao = attrs['data_votacao'],
@@ -93,6 +93,6 @@ class ComentarioHandler(BaseHandler):
         if id:
             return base.get(pk=id)
         elif pauta_id:
-            return base.get(pauta=pauta_id)
+            return base.filter(pauta=pauta_id)
         else:
             return base.all()
