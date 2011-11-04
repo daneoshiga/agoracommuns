@@ -25,14 +25,15 @@ class PautaHandler(BaseHandler):
             request.data = request.POST
         attrs = self.flatten_dict(request.data)
         try:
-            model = self.model(usuario = Usuario.objects.get(pk=attrs['usuario']),
+            model = self.model(
+                    usuario = Usuario.objects.get(pk=attrs['usuario']),
                     data_validacao = attrs['data_validacao'],
                     data_delibera = attrs['data_delibera'],
                     data_votacao = attrs['data_votacao'],
                     votos_promover = attrs['votos_promover'],
                     titulo = attrs['titulo'],
                     pauta = attrs['pauta'],
-                    status = 1
+                    status = 1,
                     )
         except:
             return rc.BAD_REQUEST
@@ -93,9 +94,11 @@ class VotoHandler(BaseHandler):
 
         attrs = self.flatten_dict(request.data)
         try:
-            mymodel = Voto(pauta= Pauta.objects.get(pk=kwargs['pauta_id']),
+            mymodel = Voto(
+                    pauta= Pauta.objects.get(pk=kwargs['pauta_id']),
                     usuario=Usuario.objects.get(pk=attrs['usuario']),
-                    tipo=attrs['tipo'])
+                    tipo=attrs['tipo'],
+                    )
         except:
             return rc.BAD_REQUEST
         else:
