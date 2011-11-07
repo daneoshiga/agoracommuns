@@ -51,7 +51,7 @@ class DeliberacaoHandler(BaseHandler):
         if id:
             return base.get(pk=id)
         elif pauta_id:
-            return base.get(pauta=pauta_id)
+            return base.filter(pauta=pauta_id)
         else:
             return base.all()
 
