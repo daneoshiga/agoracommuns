@@ -5,9 +5,7 @@ Modernizr.load([{
         },
 
     complete: function () {
-        if (correct) {
-            onComplete();
-        }
+        onComplete();
     }
 }]);
 
