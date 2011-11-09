@@ -15,3 +15,11 @@ function doAjaxCall(type, url, data, callback) {
         success: callback
     });
 }
+
+function test(anyvar) {
+    console.log(anyvar);
+    }
+
+$("#pautas").click(function () {
+    doAjaxCall("GET", baseurl+"api/pautas/",data,test);
+});
