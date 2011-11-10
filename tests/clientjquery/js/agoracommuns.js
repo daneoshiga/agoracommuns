@@ -9,26 +9,39 @@ Modernizr.load([{
     }
 }]);
 
+function displayPauta(data) {
+    $.each(data, function(name, value){
+        $("#pautas").append('<div class="pauta">');
+            $.each(value, function(name, value){
+                $("#pautas .pauta:last-child").append("Campo: "+name+"<br/>");
+                $("#pautas .pauta:last-child").append("Valor: "+value+"<br/>");
+                $("#pautas .pauta:last-child").append("<br/>");
+            }); 
+        $("#pautas").append('</div>');
+    });
+}
+
+function doAjaxCall(type, url, data, callback) {
+    $.ajax({
+        type: type,
+        url: url,
+        dataType: "jsonp",
+        data: data,
+        success: callback
+    });
+}
+
+function useTemplate(template, data, container) {
+    if (template) {
+        container.empty();
+        template.tmpl(data).appendTo(container);
+    }
+}
 
 function onComplete() {
     baseUrl = "http://127.0.0.1:8000/";
 
-    $
-    function doAjaxCall(type, url, data, callback) {
-        $.ajax({
-            type: type,
-            url: url,
-            dataType: "json",
-            data: data,
-            success: callback
-        });
-    }
+    doAjaxCall("GET",baseUrl+"api/pautas/","",displayPauta); 
+    
 
-    function test(anyvar) {
-        console.log(anyvar);
-    }
-
-    $("#pautas").click(function () {
-        doAjaxCall("GET", baseurl+"api/pautas/",data,test);
-    });
 }
