@@ -17,7 +17,9 @@ function displayPauta(data) {
                 $("#pautas .pauta:last-child").append(value+"<br/>");
                 $("#pautas .pauta:last-child").append("<br/>");
             }); 
-
+        $("#pautas .pauta:last-child").append('<a href="" class="linkvotar">Votar</a></br>');
+        $("#pautas .pauta:last-child").append('<a href="" class="linkdeliberar">Deliberar</a></br>');
+        $("#pautas .pauta:last-child").append('<a href="" class="linkcomentar">Comentar</a></br>');
         $("#pautas").append('</div>');
     });
 }
@@ -41,17 +43,22 @@ function useTemplate(template, data, container) {
 
 function onComplete() {
     $("#votar").dialog({
-    autoOpen: false,
-    buttons: {
-        "Ok": function() {
-            $(this).dialog("close");
-        },
-        "Cancel": function() {
-            $(this).dialog("close");
+        autoOpen: false,
+        buttons: {
+            "Ok": function() {
+                $(this).dialog("close");
+            },
+            "Cancel": function() {
+                $(this).dialog("close");
+            }
         }
-
-    }
     });
+
+    $(".linkvotar").live("click", function() {
+        $("#votar").dialog('open');
+        return false;
+    });
+
     baseUrl = "http://127.0.0.1:8000/";
 
     doAjaxCall("GET",baseUrl+"api/pautas/","",displayPauta); 
