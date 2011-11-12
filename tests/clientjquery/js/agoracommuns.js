@@ -15,19 +15,11 @@ function displayPauta(data) {
         $("#pautas").append('<div class="pauta">');
             
             $.each(value, function(name, value){
-                if (name == 'titulo'){
-                    
-                    $("#pautas .pauta:last-child").append("Campo: "+name+" | ");
-                    $("#pautas .pauta:last-child").append(value+"<br/>");
-                    $("#pautas .pauta:last-child").append("<br/>");
-                    
-                } else {
-
-                    $("#pautas .pauta:last-child").append("Campo: "+name+" | ");
-                    $("#pautas .pauta:last-child").append(value+"<br/>");
-                    $("#pautas .pauta:last-child").append("</div><br/>");
-                }
+                $("#pautas .pauta:last-child").append(name+" | ");
+                $("#pautas .pauta:last-child").append(value+"<br/>");
+                $("#pautas .pauta:last-child").append("</div><br/>");
             }); 
+
         $("#pautas .pauta:last-child").append('<a href="" class="linkvotar">Votar</a>');
         $("#pautas .pauta:last-child").append('<a href="" class="linkdeliberar">Deliberar</a>');
         $("#pautas .pauta:last-child").append('<a href="" class="linkcomentar">Comentar</a>');
