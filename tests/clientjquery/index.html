@@ -26,14 +26,19 @@
     </div>
     <div id="votar" title="Vote!">
         <input type="hidden" name="usuario" value="1">
-        <label for="tipo">tipo</label><input type="text" name="tipo" value="" id="tipo">
+        <label for="favor">Favor</label>
+        <input type="radio" name="tipo" value="1" id="favor">
+        <label for="contra">Contra</label>
+        <input type="radio" name="tipo" value="-1" id="contra">
     </div>
     <div id="comentar" title="Comente!">
-        <label for="texto">Coment&aacute;rio</label><input type="text" name="texto" value="" id="texto">
+        <label for="texto">Coment&aacute;rio</label>
+        <textarea name="texto" value="" id="texto"></textarea>
     </div>
     <div id="deliberar" title="Proponha!">
         <input type="hidden" name="usuario" value="1">
-        <label for="proposta">Proposta</label><input type="text" name="proposta" value="" id="proposta">
+        <label for="proposta">Proposta</label>
+        <textarea name="proposta" value="" id="proposta"></textarea>
     </div>
 </body>
 </html>

@@ -29,6 +29,7 @@ function displayPauta(data) {
 
     $("#pautas").accordion(); 
     $(".pauta a").button();
+    $("#favor, #contra").button();
 }
 
 function doAjaxCall(type, url, data, callback) {
