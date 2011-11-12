@@ -28,14 +28,15 @@ function displayPauta(data) {
                     $("#pautas .pauta:last-child").append("</div><br/>");
                 }
             }); 
-        $("#pautas .pauta:last-child").append('<a href="" class="linkvotar">Votar</a></br>');
-        $("#pautas .pauta:last-child").append('<a href="" class="linkdeliberar">Deliberar</a></br>');
-        $("#pautas .pauta:last-child").append('<a href="" class="linkcomentar">Comentar</a></br>');
+        $("#pautas .pauta:last-child").append('<a href="" class="linkvotar">Votar</a>');
+        $("#pautas .pauta:last-child").append('<a href="" class="linkdeliberar">Deliberar</a>');
+        $("#pautas .pauta:last-child").append('<a href="" class="linkcomentar">Comentar</a>');
         $("#pautas").append('</div>');
     });
 
 
     $("#pautas").accordion(); 
+    $(".pauta a").button();
 }
 
 function doAjaxCall(type, url, data, callback) {
@@ -56,7 +57,7 @@ function useTemplate(template, data, container) {
 }
 
 function onComplete() {
-    $("#votar").dialog({
+    $("#votar, #comentar, #deliberar").dialog({
         autoOpen: false,
         buttons: {
             "Ok": function() {
@@ -70,6 +71,17 @@ function onComplete() {
 
     $(".linkvotar").live("click", function() {
         $("#votar").dialog('open');
+        return false;
+    });
+
+    $(".linkcomentar").live("click", function() {
+        $("#comentar").dialog('open');
+        return false;
+    });
+
+
+    $(".linkdeliberar").live("click", function() {
+        $("#deliberar").dialog('open');
         return false;
     });
 
