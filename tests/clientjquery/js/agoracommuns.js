@@ -11,17 +11,31 @@ Modernizr.load([{
 
 function displayPauta(data) {
     $.each(data, function(name, value){
+        $("#pautas").append('<h3>'+value.titulo+'</h3>');
         $("#pautas").append('<div class="pauta">');
+            
             $.each(value, function(name, value){
-                $("#pautas .pauta:last-child").append("Campo: "+name+" | ");
-                $("#pautas .pauta:last-child").append(value+"<br/>");
-                $("#pautas .pauta:last-child").append("<br/>");
+                if (name == 'titulo'){
+                    
+                    $("#pautas .pauta:last-child").append("Campo: "+name+" | ");
+                    $("#pautas .pauta:last-child").append(value+"<br/>");
+                    $("#pautas .pauta:last-child").append("<br/>");
+                    
+                } else {
+
+                    $("#pautas .pauta:last-child").append("Campo: "+name+" | ");
+                    $("#pautas .pauta:last-child").append(value+"<br/>");
+                    $("#pautas .pauta:last-child").append("</div><br/>");
+                }
             }); 
         $("#pautas .pauta:last-child").append('<a href="" class="linkvotar">Votar</a></br>');
         $("#pautas .pauta:last-child").append('<a href="" class="linkdeliberar">Deliberar</a></br>');
         $("#pautas .pauta:last-child").append('<a href="" class="linkcomentar">Comentar</a></br>');
         $("#pautas").append('</div>');
     });
+
+
+    $("#pautas").accordion(); 
 }
 
 function doAjaxCall(type, url, data, callback) {
