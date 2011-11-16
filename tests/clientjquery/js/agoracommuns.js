@@ -79,6 +79,8 @@ function onComplete() {
     });
 
     baseUrl = "http://127.0.0.1:8000/";
+    baseUrl = "http://hera.ethymos.com.br:1080/agoracommuns/";
+
 
     doAjaxCall("GET",baseUrl+"api/pautas/","",displayPauta); 
     
