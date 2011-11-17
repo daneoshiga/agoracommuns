@@ -10,15 +10,18 @@ Modernizr.load([{
 }]);
 
 function displayPauta(data) {
+    var pautaAtual;
     $.each(data, function(name, value){
         $("#pautas").append('<h3>'+value.titulo+'</h3>');
-        $("#pautas").append('<div class="pauta">');
-            
-            $.each(value, function(name, value){
-                $("#pautas .pauta:last-child").append(name+" | ");
-                $("#pautas .pauta:last-child").append(value+"<br/>");
-                $("#pautas .pauta:last-child").append("</div><br/>");
-            }); 
+        $("#pautas").append('<div class="pauta"><ul>');
+
+        pautaAtual = $("#pautas .pauta:last-child");
+        pautaAtual.append("<li>pauta: " + value.pauta + "</li>");
+        pautaAtual.append("<li>status: "+ value.status + "</li>");
+        pautaAtual.append("<li>Data de Cria&ccedil;&atilde;o: "+ value.data_criacao + "</li>");
+        pautaAtual.append("<li>Data para Valida&ccedil;&atilde;o: "+ value.data_validacao + "</li>");
+        pautaAtual.append("<li>Data para Vota&ccedil;&atilde;o: "+ value.data_votacao + "</li>");
+        pautaAtual.append("<li>Votos para Promo&ccedil;&atilde;o a Pauta: "+ value.votos_promover + "</li>");
 
         $("#pautas .pauta:last-child").append('<a href="" class="linkvotar">Votar</a>');
         $("#pautas .pauta:last-child").append('<a href="" class="linkdeliberar">Deliberar</a>');
@@ -79,7 +82,7 @@ function onComplete() {
     });
 
     baseUrl = "http://127.0.0.1:8000/";
-    baseUrl = "http://hera.ethymos.com.br:1080/agoracommuns/";
+//    baseUrl = "http://hera.ethymos.com.br:1080/agoracommuns/";
 
 
     doAjaxCall("GET",baseUrl+"api/pautas/","",displayPauta); 
