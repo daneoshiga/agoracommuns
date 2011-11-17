@@ -53,6 +53,7 @@ function displayDelibera(data) {
     deliberacoes.append('<a href="" class="linkvotar">Votar</a>');
     deliberacoes.append('<a href="" class="linkdeliberar">Deliberar</a>');
     deliberacoes.append('<a href="" class="linkcomentar">Comentar</a>');
+    $("#deliberacoes a").button();
 
 }
 
