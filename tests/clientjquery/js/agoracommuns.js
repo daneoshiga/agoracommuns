@@ -47,6 +47,13 @@ function displayDelibera(data) {
         deliberacoes.append("<li>" + value.proposta + "</li>");
     });
     deliberacoes.append("</ul>");
+    deliberacoes.append('<a href="" class="linkdeliberacoes">Deliberacoes</a>');
+    deliberacoes.append('<a href="" class="linkcomentarios">Coment&aacute;rios</a>');
+
+    deliberacoes.append('<a href="" class="linkvotar">Votar</a>');
+    deliberacoes.append('<a href="" class="linkdeliberar">Deliberar</a>');
+    deliberacoes.append('<a href="" class="linkcomentar">Comentar</a>');
+
 }
 
 function doAjaxCall(type, url, data, callback) {
@@ -57,13 +64,6 @@ function doAjaxCall(type, url, data, callback) {
         data: data,
         success: callback
     });
-}
-
-function useTemplate(template, data, container) {
-    if (template) {
-        container.empty();
-        template.tmpl(data).appendTo(container);
-    }
 }
 
 function onComplete() {
