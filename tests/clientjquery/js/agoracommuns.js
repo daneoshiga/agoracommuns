@@ -11,6 +11,7 @@ Modernizr.load([{
 
 function displayPauta(data) {
     var pautaAtual;
+    var counter = 1;
     $.each(data, function(name, value){
         $("#pautas").append('<h3>'+value.titulo+'</h3>');
         $("#pautas").append('<div class="pauta"><ul>');
@@ -23,16 +24,29 @@ function displayPauta(data) {
         pautaAtual.append("<li>Data para Vota&ccedil;&atilde;o: "+ value.data_votacao + "</li>");
         pautaAtual.append("<li>Votos para Promo&ccedil;&atilde;o a Pauta: "+ value.votos_promover + "</li>");
 
-        $("#pautas .pauta:last-child").append('<a href="" class="linkvotar">Votar</a>');
-        $("#pautas .pauta:last-child").append('<a href="" class="linkdeliberar">Deliberar</a>');
-        $("#pautas .pauta:last-child").append('<a href="" class="linkcomentar">Comentar</a>');
+        pautaAtual.append('<a href="' +counter+ '" class="linkdeliberacoes">Deliberacoes</a>');
+        pautaAtual.append('<a href="" class="linkcomentarios">Coment&aacute;rios</a>');
+
+        pautaAtual.append('<a href="" class="linkvotar">Votar</a>');
+        pautaAtual.append('<a href="" class="linkdeliberar">Deliberar</a>');
+        pautaAtual.append('<a href="" class="linkcomentar">Comentar</a>');
         $("#pautas").append('</div>');
+        counter++;
     });
 
 
     $("#pautas").accordion(); 
     $(".pauta a").button();
     $("#favor, #contra").button();
+}
+
+function displayDelibera(data) {
+    var deliberacoes = $("#deliberacoes");
+    deliberacoes.append("<ul>");
+    $.each(data, function(name, value){
+        deliberacoes.append("<li>" + value.proposta + "</li>");
+    });
+    deliberacoes.append("</ul>");
 }
 
 function doAjaxCall(type, url, data, callback) {
@@ -53,7 +67,7 @@ function useTemplate(template, data, container) {
 }
 
 function onComplete() {
-    $("#votar, #comentar, #deliberar").dialog({
+    $("#votar, #comentar, #deliberar, #deliberacoes, #comentarios").dialog({
         autoOpen: false,
         buttons: {
             "Ok": function() {
@@ -78,6 +92,19 @@ function onComplete() {
 
     $(".linkdeliberar").live("click", function() {
         $("#deliberar").dialog('open');
+        return false;
+    });
+
+    $(".linkdeliberacoes").live("click", function() {
+        var id = $(this).attr("href");
+        $("#deliberacoes").empty();
+        $("#deliberacoes").dialog('open');
+        doAjaxCall("GET",baseUrl + "api/pauta/" + id + "/deliberacoes/","",displayDelibera); 
+        return false;
+    });
+
+    $(".linkcomentarios").live("click", function() {
+        $("#comentarios").dialog('open');
         return false;
     });
 
