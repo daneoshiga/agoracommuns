@@ -15,7 +15,10 @@ comentario_handler = CsrfExemptResource(ComentarioHandler)
 deliberacao_handler = CsrfExemptResource(DeliberacaoHandler)
 voto_handler = CsrfExemptResource(VotoHandler)
 
-urlpatterns = patterns('',
+urlpatterns = patterns('piston.authentication',
+        url(r'^oauth/request_token/$','oauth_request_token'),
+        url(r'^oauth/authorize/$','oauth_user_auth'),
+        url(r'^oauth/access_token/$','oauth_access_token'),
         url(r'^pauta/(?P<pauta_id>\d+)/comentarios/$',comentario_handler),
         url(r'^pauta/(?P<pauta_id>\d+)/deliberacoes/$',deliberacao_handler),
         url(r'^pauta/(?P<pauta_id>\d+)/votos/$',voto_handler),
