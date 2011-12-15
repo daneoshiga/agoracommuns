@@ -73,10 +73,8 @@ class DeliberacaoHandler(BaseHandler):
             return mymodel
 
 
-
 class VotoHandler(BaseHandler):
     allowed_methods = ('GET','PUT','POST','DELETE')
-    voto = Voto
 
     def read(self, request, id=None, pauta_id=None, delibera_id=None):
         base = Voto.objects
@@ -95,7 +93,6 @@ class VotoHandler(BaseHandler):
             request.data = request.POST
 
         attrs = self.flatten_dict(request.data)
-
 
 
         try:
@@ -118,6 +115,16 @@ class VotoHandler(BaseHandler):
         else:
             mymodel.save()
         return mymodel
+
+    def delete(self, request, id=None):
+        voto = Voto.objects.get(pk=id)
+        try:
+            voto.delete()
+        except:
+            return rc.BAD_REQUEST
+        else:
+            return rc.DELETED
+
 
 class ComentarioHandler(BaseHandler):
     allowed_methods = ('GET','PUT','POST','DELETE')
