@@ -42,7 +42,10 @@ class PautaHandler(BaseHandler):
         return model
 
     def delete(self, request, id=None):
-        pauta = Pauta.objects.get(pk=id)
+        try:
+            pauta = Pauta.objects.get(pk=id)
+        except:
+            return rc.NOT_FOUND
         try:
             pauta.delete()
         except:
@@ -83,7 +86,10 @@ class DeliberacaoHandler(BaseHandler):
             return mymodel
 
     def delete(self, request, id=None):
-        deliberacao = Deliberacao.objects.get(pk=id)
+        try:
+            deliberacao = Deliberacao.objects.get(pk=id)
+        except:
+            return rc.NOT_FOUND
         try:
             deliberacao.delete()
         except:
@@ -136,7 +142,10 @@ class VotoHandler(BaseHandler):
         return mymodel
 
     def delete(self, request, id=None):
-        voto = Voto.objects.get(pk=id)
+        try:
+            voto = Voto.objects.get(pk=id)
+        except:
+            return rc.NOT_FOUND
         try:
             voto.delete()
         except:
@@ -174,3 +183,16 @@ class ComentarioHandler(BaseHandler):
         else:
             mymodel.save()
             return mymodel
+
+    def delete(self, request, id=None):
+        try:
+            comentario = Comentario.objects.get(pk=id)
+        except:
+            return rc.NOT_FOUND
+        try:
+            comentario.delete()
+        except:
+            return rc.BAD_REQUEST
+        else:
+            return rc.DELETED
+
