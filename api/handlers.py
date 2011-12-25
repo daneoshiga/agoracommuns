@@ -41,6 +41,16 @@ class PautaHandler(BaseHandler):
             model.save()
         return model
 
+    def delete(self, request, id=None):
+        pauta = Pauta.objects.get(pk=id)
+        try:
+            pauta.delete()
+        except:
+            return rc.BAD_REQUEST
+        else:
+            return rc.DELETED
+
+
 class DeliberacaoHandler(BaseHandler):
     allowed_methods = ('GET','PUT','POST','DELETE')
     deliberacao = Deliberacao
