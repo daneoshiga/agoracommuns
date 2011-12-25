@@ -13,12 +13,16 @@ class PautaHandler(BaseHandler):
 
         base = Pauta.objects
 
-        if id:
-            return base.get(pk=id)
-        elif status_id:
-            return base.filter(status=status_id)
-        else:
-            return base.all()
+        try:
+            if id:
+                return base.get(pk=id)
+            elif status_id:
+                return base.filter(status=status_id)
+            else:
+                return base.all()
+        except:
+            return rc.NOT_FOUND
+
 
     def create(self, request, *args, **kwargs):
         if not hasattr(request, "data"):
@@ -61,12 +65,16 @@ class DeliberacaoHandler(BaseHandler):
     def read(self, request, id=None, pauta_id=None):
         base = Deliberacao.objects
 
-        if id:
-            return base.get(pk=id)
-        elif pauta_id:
-            return base.filter(pauta=pauta_id)
-        else:
-            return base.all()
+        try:
+            if id:
+                return base.get(pk=id)
+            elif pauta_id:
+                return base.filter(pauta=pauta_id)
+            else:
+                return base.all()
+        except:
+            return rc.NOT_FOUND
+
 
     def create(self, request, *args, **kwargs):
         if not hasattr(request, "data"):
@@ -104,14 +112,17 @@ class VotoHandler(BaseHandler):
     def read(self, request, id=None, pauta_id=None, delibera_id=None):
         base = Voto.objects
 
-        if id:
-            return base.get(pk=id)
-        elif pauta_id:
-            return base.filter(pauta=pauta_id)
-        elif delibera_id:
-            return base.filter(deliberacao=delibera_id)
-        else:
-            return base.all()
+        try:
+            if id:
+                return base.get(pk=id)
+            elif pauta_id:
+                return base.filter(pauta=pauta_id)
+            elif delibera_id:
+                return base.filter(deliberacao=delibera_id)
+            else:
+                return base.all()
+        except:
+            return rc.NOT_FOUND
 
     def create(self, request, *args, **kwargs):
         if not hasattr(request, "data"):
@@ -161,12 +172,15 @@ class ComentarioHandler(BaseHandler):
     def read(self, request, id=None, pauta_id=None):
         base = Comentario.objects
 
-        if id:
-            return base.get(pk=id)
-        elif pauta_id:
-            return base.filter(pauta=pauta_id)
-        else:
-            return base.all()
+        try:
+            if id:
+                return base.get(pk=id)
+            elif pauta_id:
+                return base.filter(pauta=pauta_id)
+            else:
+                return base.all()
+        except:
+            return rc.NOT_FOUND
 
     def create(self, request, *args, **kwargs):
         if not hasattr(request, "data"):
