@@ -82,6 +82,15 @@ class DeliberacaoHandler(BaseHandler):
             mymodel.save()
             return mymodel
 
+    def delete(self, request, id=None):
+        deliberacao = Deliberacao.objects.get(pk=id)
+        try:
+            deliberacao.delete()
+        except:
+            return rc.BAD_REQUEST
+        else:
+            return rc.DELETED
+
 
 class VotoHandler(BaseHandler):
     allowed_methods = ('GET','PUT','POST','DELETE')
