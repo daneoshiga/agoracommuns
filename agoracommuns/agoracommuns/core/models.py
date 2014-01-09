@@ -27,3 +27,12 @@ class Agenda(TimeStampedModel):
 
     def __unicode__(self):
         return self.title
+
+
+class Deliberation(TimeStampedModel):
+    agenda = models.ForeignKey(Agenda)
+    user = models.ForeignKey(User)
+    proposal = models.TextField(_("Proposal"))
+
+    def __unicode__(self):
+        return self.proposal
