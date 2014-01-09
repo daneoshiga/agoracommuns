@@ -26,4 +26,4 @@ class Agenda(TimeStampedModel):
         choices=STATUS_CHOICES)
 
     def __unicode__(self):
-        return self.titulo
+        return self.title
