@@ -36,3 +36,17 @@ class Deliberation(TimeStampedModel):
 
     def __unicode__(self):
         return self.proposal
+
+
+class Vote(TimeStampedModel):
+    VOTE_CHOICES = Choices(
+        (0, 'favor', _("Favor")),
+        (1, 'against', _("Against")),
+    )
+
+    agenda = models.ForeignKey(Agenda)
+    user = models.ForeignKey(User)
+    deliberation = models.ForeignKey(Deliberation)
+    type = models.IntegerField(
+        choices=VOTE_CHOICES
+    )
