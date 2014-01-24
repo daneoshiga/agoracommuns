@@ -6,9 +6,14 @@ python:
 env:
   - DJANGO_SETTINGS_MODULE=agoracommuns.settings.test
 
+cache:
+  directories:
+    - /home/travis/virtualenv/python2.7/lib/python2.7/site-packages
+    - $HOME/.pip-cache/
+
 # installing dependencies
 install:
-  pip install -r requirements/test.txt
+  pip install -r requirements/test.txt --download-cache $HOME/.pip-cache
 
 # command to run tests
 script: python agoracommuns/manage.py test
