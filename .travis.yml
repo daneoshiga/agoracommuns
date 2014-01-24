@@ -11,4 +11,4 @@ install:
   pip install -r requirements/test.txt
 
 # command to run tests
-script: python manage.py test --settings=$DJANGO_SETTINGS_MODULE
+script: python agoracommuns/manage.py test
