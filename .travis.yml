@@ -16,4 +16,4 @@ install:
   pip install -r requirements/test.txt --download-cache $HOME/.pip-cache
 
 # command to run tests
-script: python agoracommuns/manage.py test
+script: python agoracommuns/manage.py test core
