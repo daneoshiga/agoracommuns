@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Common settings and globals."""
 
 
