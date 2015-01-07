@@ -1,5 +1,9 @@
 [![Build Status](https://travis-ci.org/daneoshiga/agoracommuns.png?branch=master)](https://travis-ci.org/daneoshiga/agoracommuns)
 
+Agora Communs
+=============
+New implemenation of  [wiki][]
+
 Working Environment
 ===================
 
@@ -46,3 +50,5 @@ For production::
 
 *note: We install production requirements this way because many Platforms as a
 Services expect a requirements.txt file in the root of projects.*
+
+  [wiki]: https://github.com/teiacasadecriacao/agora-communs'
